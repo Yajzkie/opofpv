@@ -20,8 +20,10 @@
     <div class="logo" >
 		<img href="#home" src="images/logo.png" alt="OPOfpv"></div>
 
-    <button class="menu-toggle" id="menuToggle">
-    </button>
+ 
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+            ☰
+        </button>
 
     <ul id="navMenu">
         <li><a href="#home">Home</a></li>
@@ -59,36 +61,36 @@
             <div class="services">
 
                 <div class="service-card">
-                    <h3>Landscaping</h3>
+                    <h3>Aerial Photography</h3>
                     <p>
-                        Professional landscaping solutions
-                        for your property.
+                        High-quality aerial photos
+                        captured from above.
                     </p>
                 </div>
 
                 <div class="service-card">
-                    <h3>Lawn Care</h3>
+                    <h3>Drone Videography</h3>
                     <p>
-                        Keep your lawn looking healthy
-                        and beautiful.
+                        Professional drone videos
+                        for properties, events, and projects.
                     </p>
                 </div>
 
                 <div class="service-card">
-                    <h3>Hardscaping</h3>
+                    <h3>Real Estate Drone Shots</h3>
                     <p>
-                        Create beautiful patios,
-                        walkways and outdoor spaces.
+                        Showcase properties with
+                        stunning aerial photography and video.
                     </p>
                 </div>
 
                 <div class="service-card">
-                    <h3>Artificial Grass</h3>
+                    <h3>Event Coverage</h3>
                     <p>
-                        Low-maintenance artificial grass
-                        solutions.
-                    </p>
-                </div>
+                        Capture memorable events
+                        with cinematic aerial footage.
+    </p>
+</div>
 
             </div>
 
@@ -96,21 +98,51 @@
 
 
         <!-- OUR WORK -->
-        <section id="work">
+            <section id="work">
 
-            <h2>Our Work</h2>
+                <h2>Our Work</h2>
 
-            <div class="gallery">
+                <div class="work-container">
 
-                <img src="images/project1.jpg" alt="Landscaping project">
+                    <!-- Playlist -->
+                    <div class="playlist">
 
-                <img src="images/project2.jpg" alt="Landscaping project">
+                        <h3>Project Videos</h3>
 
-                <img src="images/project3.jpg" alt="Landscaping project">
+                        <button class="playlist-item"
+                                data-video="videos/project1.mp4">
+                            Project 1
+                        </button>
 
-            </div>
+                        <button class="playlist-item"
+                                data-video="videos/hero_bg.mp4">
+                            Project 2
+                        </button>
 
-        </section>
+                        <button class="playlist-item"
+                                data-video="videos/project2.mp4">
+                            Project 3
+                        </button>
+
+                    </div>
+
+                    <!-- Video Player -->
+                    <div class="video-player">
+
+                        <button class="back-to-playlist" id="backToPlaylist">
+                            ←
+                        </button>
+
+                        <video id="workVideo" controls>
+                            <source src="videos/hero_bg1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                    </div>
+
+                </div>
+
+            </section>
 
 
         <!-- ABOUT -->
@@ -119,50 +151,80 @@
             <h2>About Us</h2>
 
             <p>
-                Caneywell Landscaping provides professional
-                landscaping services designed to improve
-                the beauty and functionality of outdoor spaces.
-            </p>
+            OSOFPV is a professional drone and FPV media brand
+            focused on capturing unique perspectives from above.
+            We create high-quality aerial photography and
+            cinematic drone footage that brings properties,
+            events, businesses, and special moments to life.
+        </p>
+
+        <p>
+            Our goal is to capture every shot with creativity,
+            precision, and a unique FPV perspective. Whether you
+            need stunning aerial photos, cinematic videos, or
+            dynamic drone footage, OSOFPV helps turn your vision
+            into unforgettable visuals.
+        </p>
 
         </section>
 
 
         <!-- CONTACT -->
-        <section id="contact">
+        <<section id="contact">
 
-            <h2>Get a Free Estimate</h2>
+    <h2>Get a Free Estimate</h2>
 
-            <form>
+        <form
+            action="https://formsubmit.co/yaj143sabalo@gmail.com"
+            method="POST"
+        >
 
-                <input
-                    type="text"
-                    placeholder="Your Name"
-                    required
-                >
+            <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+            >
 
-                <input
-                    type="email"
-                    placeholder="Your Email"
-                    required
-                >
+            <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+            >
 
-                <input
-                    type="tel"
-                    placeholder="Phone Number"
-                >
+            <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+            >
 
-                <textarea
-                    placeholder="Tell us about your project"
-                    rows="6">
-                </textarea>
+            <textarea
+                name="message"
+                placeholder="Tell us about your project"
+                rows="6"
+                required
+            ></textarea>
 
-                <button type="submit">
-                    Request Estimate
-                </button>
+            <input
+                type="hidden"
+                name="_subject"
+                value="New OSOFPV Project Inquiry"
+            >
 
-            </form>
+            <input
+                type="hidden"
+                name="_captcha"
+                value="false"
+            >
 
-        </section>
+            <button type="submit">
+                Request Estimate
+            </button>
+
+        </form>
+
+    </section>
 
     </main>
 
