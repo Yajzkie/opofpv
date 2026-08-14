@@ -171,31 +171,122 @@ section h2 {
 
 /* SERVICES */
 
-.services {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+#services {
+    padding: 80px 8%;
+    text-align: center;
 }
 
-.service-card {
-    padding: 30px;
+#services h2 {
+    margin-bottom: 40px;
+}
+
+.services-carousel {
+    width: 100%;
+    max-width: 3000px;
+    min-height: 550px;
+    margin: auto;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.service-slide {
+    width: 100%;
+    min-height: 550px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.service-content {
+    max-width: 650px;
+
+    color: white;
+
     text-align: center;
+}
 
-    border-radius: 10px;
+.service-content h3 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
 
-    background: #f5f7f5;
+.service-content p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.carousel-btn {
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #3AA7A9;
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    z-index: 2;
 
     transition: 0.3s;
 }
 
-.service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+.carousel-btn:hover {
+    transform: scale(1.1);
 }
 
-.service-card h3 {
-    color: #3AA7A9;
-    margin-bottom: 15px;
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+.carousel-dots {
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ccc;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: #3AA7A9;
+    transform: scale(1.3);
 }
 
 

@@ -1,3 +1,74 @@
+const { createApp } = Vue;
+
+createApp({
+
+    data() {
+
+        return {
+
+            currentService: 0,
+
+            services: [
+                        {
+                            title: "Aerial Photography",
+                            description: "High-quality aerial photography captured from above.",
+                            background: "images/bg1.jpg"
+                        },
+
+                        {
+                            title: "Drone Videography",
+                            description: "Professional cinematic drone footage for businesses, properties, and events.",
+                            background: "images/drone-video.jpg"
+                        },
+
+                        {
+                            title: "Real Estate Drone Shots",
+                            description: "Showcase properties with stunning aerial photos and videos.",
+                            background: "images/real-estate.jpg"
+                        },
+
+                        {
+                            title: "Event Coverage",
+                            description: "Capture memorable events from a unique aerial perspective.",
+                            background: "images/event.jpg"
+                        }
+
+
+                     ]
+
+        };
+
+    },
+
+    methods: {
+
+        nextService() {
+
+            this.currentService =
+                (this.currentService + 1) %
+                this.services.length;
+
+        },
+
+        previousService() {
+
+            this.currentService =
+                (this.currentService - 1 + this.services.length) %
+                this.services.length;
+
+        }
+
+    }
+
+}).mount("#app");
+
+
+
+
+
+
+
+
 // ==========================
 // MOBILE NAVIGATION
 // ==========================
