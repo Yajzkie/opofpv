@@ -43,118 +43,80 @@
                 <!-- HERO -->
                 <section class="hero" id="home">
 
-                    <video class="hero-background" autoplay muted loop playsinline>
-                        <source src="videos/hero_bg1.mp4" type="video/mp4">
-                    </video>
+                    <div class="hero-media">
 
-                    <div class="hero-overlay"></div>
+                        <video class="hero-background"
+                            autoplay
+                            muted
+                            loop
+                            playsinline>
 
-                    <div class="hero-logo">
-                        <img src="images/logo.png" alt="OPOfpv">
+                            <source src="videos/hero_bg1.mp4" type="video/mp4">
+
+                        </video>
+
                     </div>
-                </section>
-            
 
-                <!-- SERVICES -->
-                
-                <section id="services">
 
-                    <h2>Our Services</h2>
+                    <div class="hero-content">
 
-                    <div class="services-carousel">
+                        <div class="hero-logo">
+                            <img src="images/logo.png" alt="OSOFPV">
+                        </div>
 
-                        <button
-                            class="carousel-btn prev"
-                            @click="previousService"
-                        >
-                            &#10094;
-                        </button>
+                        <div class="hero-text">
 
-                        <div
-                            class="service-slide"
-                            :style="{
-                                backgroundImage:
-                                    `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-                                    url('${services[currentService].background}')`
-                            }"
-                        >
+                            <h1>
+                                FPV DRONE<br>
+                                SERVICES
+                            </h1>
 
-                            <div class="service-content">
+                            <p>
+                                Our FPV drone business provides high-quality aerial
+                                photography and cinematic video services for businesses,
+                                events, properties, tourism, and outdoor projects.
+                            </p>
 
-                                <h3>{{ services[currentService].title }}</h3>
+                            <p>
+                                Using fast and agile FPV drones, we capture dynamic shots
+                                that traditional cameras cannot easily achieve.
+                            </p>
 
-                                <p>
-                                    {{ services[currentService].description }}
-                                </p>
-
-                            </div>
+                            <a href="#services" class="hero-button">
+                                LEARN MORE
+                            </a>
 
                         </div>
 
-                        <button
-                            class="carousel-btn next"
-                            @click="nextService"
-                        >
-                            &#10095;
-                        </button>
-
-                    </div>
-
-                    <div class="carousel-dots">
-
-                        <span
-                            v-for="(service, index) in services"
-                            :key="index"
-                            class="dot"
-                            :class="{ active: currentService === index }"
-                            @click="currentService = index"
-                        ></span>
-
                     </div>
 
                 </section>
 
 
-                <!-- OUR WORK -->
-                    <section id="work">
+                <!-- SERVICES -->
+                   <section id="services">
 
-                        <h2>Our Work</h2>
+                        <h2>Our Services</h2>
 
-                        <div class="work-container">
+                        <div class="services-cards">
 
-                            <!-- Playlist -->
-                            <div class="playlist">
+                            <div
+                                v-for="service in services"
+                                class="service-card"
+                                :style="{
+                                    backgroundImage:
+                                        `linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+                                        url('${service.background}')`
+                                }"
+                            >
 
-                                <h3>Project Videos</h3>
+                                <div class="service-content">
 
-                                <button class="playlist-item"
-                                        data-video="videos/project1.mp4">
-                                    Project 1
-                                </button>
+                                    <h3>{{ service.title }}</h3>
 
-                                <button class="playlist-item"
-                                        data-video="videos/hero_bg.mp4">
-                                    Project 2
-                                </button>
+                                    <p>{{ service.description }}</p>
 
-                                <button class="playlist-item"
-                                        data-video="videos/project2.mp4">
-                                    Project 3
-                                </button>
-
-                            </div>
-
-                            <!-- Video Player -->
-                            <div class="video-player">
-
-                                <button class="back-to-playlist" id="backToPlaylist">
-                                    ←
-                                </button>
-
-                                <video id="workVideo" controls>
-                                    <source src="videos/hero_bg1.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
+                                </div>
 
                             </div>
 
@@ -162,8 +124,97 @@
 
                     </section>
 
+                <!-- OUR WORK -->
 
-                <!-- ABOUT -->
+                    <section id="work">
+
+                        <h2>Our Work</h2>
+
+                        <div class="work-cards">
+
+                            <div
+                                class="work-card"
+                                data-video="videos/project1.mp4"
+                            >
+                                <div class="work-thumbnail">
+                                    <video muted preload="metadata">
+                                        <source src="videos/project1.mp4" type="video/mp4">
+                                    </video>
+
+                                    <div class="play-icon">
+                                        ▶
+                                    </div>
+                                </div>
+
+                                <div class="work-card-content">
+                                    <h3>Project 1</h3>
+                                    <p>FPV drone footage showcasing our work.</p>
+                                </div>
+                            </div>
+
+
+                            <div
+                                class="work-card"
+                                data-video="videos/project1.mp4"
+                            >
+                                <div class="work-thumbnail">
+                                    <video muted preload="metadata">
+                                        <source src="videos/project1.mp4" type="video/mp4">
+                                    </video>
+
+                                    <div class="play-icon">
+                                        ▶
+                                    </div>
+                                </div>
+
+                                <div class="work-card-content">
+                                    <h3>Project 2</h3>
+                                    <p>Cinematic aerial footage captured with FPV.</p>
+                                </div>
+                            </div>
+
+
+                            <div
+                                class="work-card"
+                                data-video="videos/project2.mp4"
+                            >
+                                <div class="work-thumbnail">
+                                    <video muted preload="metadata">
+                                        <source src="videos/project2.mp4" type="video/mp4">
+                                    </video>
+
+                                    <div class="play-icon">
+                                        ▶
+                                    </div>
+                                </div>
+
+                                <div class="work-card-content">
+                                    <h3>Project 3</h3>
+                                    <p>Dynamic drone footage for visual storytelling.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- VIDEO PLAYER -->
+
+                        <div class="work-video-player" id="workVideoPlayer">
+
+                            <button id="closeWorkVideo">
+                                ✕
+                            </button>
+
+                            <video id="workVideo" controls>
+                                Your browser does not support the video tag.
+                            </video>
+
+                        </div>
+
+                    </section>
+
+
+                <!-- ABOUT
                 <section id="about">
 
                     <h2>About Us</h2>
@@ -184,7 +235,7 @@
                             into unforgettable visuals.
                         </p>
 
-                </section>
+                </section> -->
 
 
                 <!-- CONTACT -->
