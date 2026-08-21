@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OPOfpv</title>
+    <title>OPOfpv — Cinematic FPV Drone Services</title>
 
     <meta name="description"
-          content="Professional landscaping services. Contact us today for a free estimate.">
+          content="OPOfpv delivers cinematic FPV drone footage — aerial photography, videography, real estate tours and event coverage. Book a flight today.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Saira:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,13 +22,14 @@
             <header>
                 <nav>
 
-                    <div class="logo" >
-                        <img href="#home" src="images/logo.png" alt="OPOfpv"></div>
+                    <div class="logo">
+                        <a href="#home"><img src="images/logo.png" alt="OPOfpv"></a>
+                    </div>
 
-                
-                        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-                            ☰
-                        </button>
+
+                    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                        ☰
+                    </button>
 
                     <ul id="navMenu">
                         <li><a href="#home">Home</a></li>
@@ -32,6 +37,7 @@
                         <li><a href="#work">Our Work</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li class="nav-cta-item"><a href="#contact" class="btn btn-primary btn-small nav-cta">Book a flight</a></li>
                     </ul>
 
                 </nav>
@@ -41,6 +47,7 @@
             <main>
 
                 <!-- HERO -->
+
                 <section class="hero" id="home">
 
                     <div class="hero-media">
@@ -58,33 +65,59 @@
                     </div>
 
 
+                    <!-- OSD chrome -->
+
+                    <div class="osd-corners" aria-hidden="true">
+                        <i></i><i></i><i></i><i></i>
+                    </div>
+
+                    <div class="osd osd-tl" aria-hidden="true">
+                        <span class="rec-dot"></span>REC
+                    </div>
+
+                    <div class="osd osd-tr" aria-hidden="true">
+                        BAT 98% · 14.8V
+                    </div>
+
+                    <div class="osd osd-bl" aria-hidden="true">
+                        GPS LOCK · 12 SATS
+                    </div>
+
+                    <div class="osd osd-br" aria-hidden="true">
+                        4K60 · 120FPS
+                    </div>
+
+
                     <div class="hero-content">
 
-                        <div class="hero-logo">
-                            <img src="images/logo.png" alt="OSOFPV">
-                        </div>
+                        <p class="eyebrow hero-eyebrow">// OPOfpv — Cinematic FPV Media</p>
 
                         <div class="hero-text">
 
                             <h1>
-                                FPV DRONE<br>
-                                SERVICES
+                                Fly.<br>
+                                Film.<br>
+                                Deliver.
                             </h1>
 
                             <p>
-                                Our FPV drone business provides high-quality aerial
-                                photography and cinematic video services for businesses,
-                                events, properties, tourism, and outdoor projects.
+                                High-speed FPV drones capture the shots ordinary
+                                cameras can't — aerial photography and cinematic
+                                video for businesses, events, properties and
+                                projects.
                             </p>
 
-                            <p>
-                                Using fast and agile FPV drones, we capture dynamic shots
-                                that traditional cameras cannot easily achieve.
-                            </p>
+                            <div class="hero-actions">
 
-                            <a href="#services" class="hero-button">
-                                LEARN MORE
-                            </a>
+                                <a href="#contact" class="btn btn-primary">
+                                    Book a flight
+                                </a>
+
+                                <a href="#work" class="btn btn-ghost">
+                                    See our work
+                                </a>
+
+                            </div>
 
                         </div>
 
@@ -94,158 +127,253 @@
 
 
                 <!-- SERVICES -->
-                   <section id="services">
 
-                        <h2>Our Services</h2>
+                <section id="services">
 
-                        <div class="services-cards">
+                    <div class="section-head" data-reveal>
+                        <p class="eyebrow">// Our Services</p>
+                        <h2>What we shoot</h2>
+                    </div>
 
-                            <div
-                                v-for="service in services"
-                                class="service-card"
-                                :style="{
-                                    backgroundImage:
-                                        `linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
-                                        url('${service.background}')`
-                                }"
-                            >
+                    <div class="services-cards" data-reveal>
 
-                                <div class="service-content">
+                        <div
+                            v-for="service in services"
+                            class="service-card"
+                            :style="{
+                                backgroundImage:
+                                    `linear-gradient(rgba(5,10,18,.35), rgba(5,10,18,.75)),
+                                    url('${service.background}')`
+                            }"
+                        >
 
-                                    <h3>{{ service.title }}</h3>
+                            <div class="service-content">
 
-                                    <p>{{ service.description }}</p>
+                                <h3>{{ service.title }}</h3>
 
-                                </div>
+                                <p>{{ service.description }}</p>
 
                             </div>
 
                         </div>
 
-                    </section>
+                    </div>
+
+                </section>
+
 
                 <!-- OUR WORK -->
 
-                    <section id="work">
+                <section id="work">
 
-                        <h2>Our Work</h2>
+                    <div class="section-head" data-reveal>
+                        <p class="eyebrow">// Our Work</p>
+                        <h2>Recent flights</h2>
+                    </div>
 
-                        <div class="work-cards">
+                    <div class="work-cards">
 
-                            <div
-                                class="work-card"
-                                data-video="videos/project1.mp4"
-                            >
-                                <div class="work-thumbnail">
-                                    <video muted preload="metadata">
-                                        <source src="videos/project1.mp4" type="video/mp4">
-                                    </video>
+                        <div
+                            class="work-card"
+                            data-video="videos/project1.mp4"
+                            data-reveal
+                        >
+                            <div class="work-thumbnail">
+                                <video muted preload="metadata">
+                                    <source src="videos/project1.mp4" type="video/mp4">
+                                </video>
 
-                                    <div class="play-icon">
-                                        ▶
-                                    </div>
-                                </div>
-
-                                <div class="work-card-content">
-                                    <h3>Project 1</h3>
-                                    <p>FPV drone footage showcasing our work.</p>
+                                <div class="play-icon">
+                                    ▶
                                 </div>
                             </div>
 
-
-                            <div
-                                class="work-card"
-                                data-video="videos/project1.mp4"
-                            >
-                                <div class="work-thumbnail">
-                                    <video muted preload="metadata">
-                                        <source src="videos/project1.mp4" type="video/mp4">
-                                    </video>
-
-                                    <div class="play-icon">
-                                        ▶
-                                    </div>
-                                </div>
-
-                                <div class="work-card-content">
-                                    <h3>Project 2</h3>
-                                    <p>Cinematic aerial footage captured with FPV.</p>
-                                </div>
+                            <div class="work-card-content">
+                                <p class="card-meta">CLIP 01</p>
+                                <h3>Project 1</h3>
+                                <p>FPV drone footage showcasing our work.</p>
                             </div>
-
-
-                            <div
-                                class="work-card"
-                                data-video="videos/project2.mp4"
-                            >
-                                <div class="work-thumbnail">
-                                    <video muted preload="metadata">
-                                        <source src="videos/project2.mp4" type="video/mp4">
-                                    </video>
-
-                                    <div class="play-icon">
-                                        ▶
-                                    </div>
-                                </div>
-
-                                <div class="work-card-content">
-                                    <h3>Project 3</h3>
-                                    <p>Dynamic drone footage for visual storytelling.</p>
-                                </div>
-                            </div>
-
                         </div>
 
 
-                        <!-- VIDEO PLAYER -->
+                        <div
+                            class="work-card"
+                            data-video="videos/project1.mp4"
+                            data-reveal
+                            style="--d:.12s"
+                        >
+                            <div class="work-thumbnail">
+                                <video muted preload="metadata">
+                                    <source src="videos/project1.mp4" type="video/mp4">
+                                </video>
 
-                        <div class="work-video-player" id="workVideoPlayer">
+                                <div class="play-icon">
+                                    ▶
+                                </div>
+                            </div>
 
-                            <button id="closeWorkVideo">
-                                ✕
-                            </button>
-
-                            <video id="workVideo" controls>
-                                Your browser does not support the video tag.
-                            </video>
-
+                            <div class="work-card-content">
+                                <p class="card-meta">CLIP 02</p>
+                                <h3>Project 2</h3>
+                                <p>Cinematic aerial footage captured with FPV.</p>
+                            </div>
                         </div>
 
-                    </section>
+
+                        <div
+                            class="work-card"
+                            data-video="videos/project2.mp4"
+                            data-reveal
+                            style="--d:.24s"
+                        >
+                            <div class="work-thumbnail">
+                                <video muted preload="metadata">
+                                    <source src="videos/project2.mp4" type="video/mp4">
+                                </video>
+
+                                <div class="play-icon">
+                                    ▶
+                                </div>
+                            </div>
+
+                            <div class="work-card-content">
+                                <p class="card-meta">CLIP 03</p>
+                                <h3>Project 3</h3>
+                                <p>Dynamic drone footage for visual storytelling.</p>
+                            </div>
+                        </div>
+
+                    </div>
 
 
-                <!-- ABOUT
+                    <!-- VIDEO PLAYER -->
+
+                    <div class="work-video-player" id="workVideoPlayer">
+
+                        <button id="closeWorkVideo" aria-label="Close video">
+                            ✕
+                        </button>
+
+                        <video id="workVideo" controls>
+                            Your browser does not support the video tag.
+                        </video>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ABOUT -->
+
                 <section id="about">
 
-                    <h2>About Us</h2>
+                    <div class="about-grid">
 
-                        <p>
-                            OSOFPV is a professional drone and FPV media brand
-                            focused on capturing unique perspectives from above.
-                            We create high-quality aerial photography and
-                            cinematic drone footage that brings properties,
-                            events, businesses, and special moments to life.
-                        </p>
+                        <div class="about-intro" data-reveal>
+                            <p class="eyebrow">// About Us</p>
+                            <h2>The pilot behind<br>the lens</h2>
+                        </div>
 
-                        <p>
-                            Our goal is to capture every shot with creativity,
-                            precision, and a unique FPV perspective. Whether you
-                            need stunning aerial photos, cinematic videos, or
-                            dynamic drone footage, OSOFPV helps turn your vision
-                            into unforgettable visuals.
-                        </p>
+                        <div class="about-body" data-reveal style="--d:.12s">
 
-                </section> -->
+                            <p>
+                                OPOfpv is an FPV media brand built around one
+                                idea: some shots can only come from a drone
+                                that flies like it belongs in the scene. We
+                                fly fast, close and precise to capture
+                                perspectives no other camera can reach.
+                            </p>
+
+                            <p>
+                                From property tours to events and outdoor
+                                projects, every flight is planned, licensed
+                                and delivered as clean, ready-to-use footage.
+                            </p>
+
+                            <ul class="stats">
+
+                                <li>
+                                    <strong>150+</strong>
+                                    <span>Flights logged</span>
+                                </li>
+
+                                <li>
+                                    <strong>40+</strong>
+                                    <span>Clients served</span>
+                                </li>
+
+                                <li>
+                                    <strong>4K60</strong>
+                                    <span>Cinematic standard</span>
+                                </li>
+
+                                <li>
+                                    <strong>100%</strong>
+                                    <span>Licensed &amp; insured</span>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </section>
 
 
                 <!-- CONTACT -->
+
                 <section id="contact">
 
-                    <h2>Get a Free Estimate</h2>
+                    <div class="contact-grid">
+
+                        <div class="contact-info" data-reveal>
+
+                            <p class="eyebrow">// Contact</p>
+                            <h2>Get a free estimate</h2>
+
+                            <p class="contact-lede">
+                                Tell us about your project — where it is,
+                                what it's for, and the date. We usually reply
+                                within 24 hours.
+                            </p>
+
+                            <ul class="contact-channels">
+
+                                <li>
+                                    <span class="channel-label">EMAIL</span>
+                                    <a href="mailto:yaj143sabalo@gmail.com">yaj143sabalo@gmail.com</a>
+                                </li>
+
+                                <li>
+                                    <span class="channel-label">SOCIAL</span>
+
+                                    <div class="socials">
+
+                                        <a href="#" aria-label="Instagram">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+                                        </a>
+
+                                        <a href="#" aria-label="Facebook">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6v3h3v9h3v-9h3l1-3h-4V6.8c0-.5.3-.8.8-.8H15V3z"/></svg>
+                                        </a>
+
+                                        <a href="#" aria-label="YouTube">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5v5l4.5-2.5-4.5-2.5z" fill="currentColor" stroke="none"/></svg>
+                                        </a>
+
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
 
                         <form
                             action="https://formsubmit.co/yaj143sabalo@gmail.com"
                             method="POST"
+                            data-reveal
+                            style="--d:.12s"
                         >
 
                             <input
@@ -278,7 +406,7 @@
                             <input
                                 type="hidden"
                                 name="_subject"
-                                value="New OSOFPV Project Inquiry"
+                                value="New OPOfpv Project Inquiry"
                             >
 
                             <input
@@ -287,11 +415,13 @@
                                 value="false"
                             >
 
-                            <button type="submit">
+                            <button type="submit" class="btn btn-primary btn-block">
                                 Request Estimate
                             </button>
 
                         </form>
+
+                    </div>
 
                 </section>
 
@@ -300,10 +430,35 @@
 
             <footer>
 
-                <p>
-                    © 2026 OSOFPV.
-                    All rights reserved.
-                </p>
+                <div class="footer-grid">
+
+                    <div class="footer-brand">
+                        <img src="images/logo.png" alt="OPOfpv logo">
+                        <p>Cinematic FPV drone services.<br>Fly. Film. Deliver.</p>
+                    </div>
+
+                    <div class="footer-col">
+                        <p class="footer-heading">Site</p>
+                        <a href="#home">Home</a>
+                        <a href="#services">Services</a>
+                        <a href="#work">Our Work</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+
+                    <div class="footer-col">
+                        <p class="footer-heading">Connect</p>
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">YouTube</a>
+                        <a href="mailto:yaj143sabalo@gmail.com">yaj143sabalo@gmail.com</a>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom">
+                    <p>© 2026 OPOfpv. All rights reserved.</p>
+                </div>
 
             </footer>
     </div>

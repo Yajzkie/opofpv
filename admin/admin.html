@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>OSOFPV Admin</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         ADMIN HEADER
+    ====================================================== -->
+
+    <header class="admin-header">
+
+        <div>
+            <h1>OSOFPV</h1>
+            <span>Admin Dashboard</span>
+        </div>
+
+        <button id="logoutButton">
+            Logout
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         DASHBOARD
+    ====================================================== -->
+
+    <main class="dashboard">
+
+
+        <!-- =================================================
+             SERVICES
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Services</h2>
+                    <p>Manage the services shown on your website.</p>
+                </div>
+
+                <button id="addServiceButton">
+                    + Add Service
+                </button>
+
+            </div>
+
+
+            <div id="servicesList" class="admin-list">
+
+                <p class="loading">
+                    Loading services...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VIDEOS
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Videos</h2>
+                    <p>Manage the videos shown in Our Work.</p>
+                </div>
+
+                <button id="addVideoButton">
+                    + Add Video
+                </button>
+
+            </div>
+
+
+            <div id="videosList" class="admin-list">
+
+                <p class="loading">
+                    Loading videos...
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD SERVICE MODAL
+    ====================================================== -->
+
+    <div id="serviceModal" class="modal">
+
+        <div class="modal-box">
+
+            <button
+                class="close-modal"
+                data-close="serviceModal"
+            >
+                ✕
+            </button>
+
+            <h2>Add Service</h2>
+
+
+            <form id="serviceForm">
+
+                <input
+                    type="text"
+                    id="serviceTitle"
+                    placeholder="Service title"
+                    required
+                >
+
+                <textarea
+                    id="serviceDescription"
+                    placeholder="Service description"
+                    rows="5"
+                    required
+                ></textarea>
+
+                <input
+                    type="text"
+                    id="serviceBackground"
+                    placeholder="Image path or URL"
+                    required
+                >
+
+                <button type="submit">
+                    Add Service
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD VIDEO MODAL
+    ====================================================== -->
+
+    <div id="videoModal" class="modal">
+
+        <div class="modal-box">
+
+            <button
+                class="close-modal"
+                data-close="videoModal"
+            >
+                ✕
+            </button>
+
+            <h2>Add Video</h2>
+
+
+            <form id="videoForm">
+
+                <input
+                    type="text"
+                    id="videoTitle"
+                    placeholder="Video title"
+                    required
+                >
+
+                <textarea
+                    id="videoDescription"
+                    placeholder="Video description"
+                    rows="5"
+                    required
+                ></textarea>
+
+               <input
+                    type="file"
+                    id="videoFile"
+                    accept="video/mp4,video/webm,video/quicktime"
+                    required
+                >
+
+                <button type="submit">
+                    Add Video
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FIREBASE
+    ====================================================== -->
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+
+</html>

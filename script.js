@@ -171,3 +171,78 @@ navLinks.forEach(function (link) {
     });
 
 });
+
+
+/* =========================================================
+   NAVBAR SCROLL STATE
+======================================================== */
+
+const header = document.querySelector("header");
+
+function updateHeader() {
+
+    header.classList.toggle(
+        "scrolled",
+        window.scrollY > 40
+    );
+
+}
+
+updateHeader();
+
+window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL
+======================================================== */
+
+const revealElements =
+    document.querySelectorAll("[data-reveal]");
+
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+if (
+    prefersReducedMotion ||
+    !("IntersectionObserver" in window)
+) {
+
+    revealElements.forEach(function (el) {
+        el.classList.add("revealed");
+    });
+
+} else {
+
+    const revealObserver =
+        new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("revealed");
+
+                        revealObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            { threshold: 0.15 }
+        );
+
+    revealElements.forEach(function (el) {
+        revealObserver.observe(el);
+    });
+
+}
