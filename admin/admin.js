@@ -1,5 +1,5 @@
 /* =========================================================
-   FIREBASE — AUTH & STORAGE ONLY
+   FIREBASE — AUTH ONLY
    ========================================================= */
 
 import {
@@ -12,14 +12,6 @@ import {
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
-
-import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 
 /* =========================================================
@@ -64,8 +56,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-
-const storage = getStorage(app);
 
 
 /* =========================================================
@@ -258,41 +248,43 @@ document
             ========================================= */
 
             const fileName =
-                Date.now() + "_" + file.name;
-
-
-            const storageRef =
-                ref(
-                    storage,
-                    "services/" + fileName
-                );
+                Date.now() + "_" +
+                file.name.replace(/\s+/g, "_");
 
 
             /* =========================================
-               UPLOAD IMAGE
+               UPLOAD IMAGE (Supabase Storage)
             ========================================= */
 
-            const snapshot =
-                await uploadBytes(
-                    storageRef,
-                    file
-                );
+            const { error: uploadError } =
+                await supabase
+                    .storage
+                    .from("media")
+                    .upload(
+                        "services/" + fileName,
+                        file,
+                        { contentType: file.type }
+                    );
 
 
-            console.log(
-                "Uploaded:",
-                snapshot.metadata.fullPath
-            );
+            if (uploadError) {
+                throw uploadError;
+            }
 
 
             /* =========================================
-               GET DOWNLOAD URL
+               GET PUBLIC URL
             ========================================= */
+
+            const { data } =
+                supabase
+                    .storage
+                    .from("media")
+                    .getPublicUrl("services/" + fileName);
+
 
             const downloadURL =
-                await getDownloadURL(
-                    snapshot.ref
-                );
+                data.publicUrl;
 
 
             console.log(
@@ -500,41 +492,49 @@ document
             ========================================= */
 
             const fileName =
-                Date.now() + "_" + file.name;
-
-
-            const storageRef =
-                ref(
-                    storage,
-                    "videos/" + fileName
-                );
+                Date.now() + "_" +
+                file.name.replace(/\s+/g, "_");
 
 
             /* =========================================
-               UPLOAD VIDEO (Firebase Storage)
+               UPLOAD VIDEO (Supabase Storage)
             ========================================= */
 
-            const snapshot =
-                await uploadBytes(
-                    storageRef,
-                    file
-                );
+            const { error: uploadError } =
+                await supabase
+                    .storage
+                    .from("media")
+                    .upload(
+                        "videos/" + fileName,
+                        file,
+                        { contentType: file.type }
+                    );
+
+
+            if (uploadError) {
+                throw uploadError;
+            }
 
 
             console.log(
                 "Uploaded:",
-                snapshot.metadata.fullPath
+                "videos/" + fileName
             );
 
 
             /* =========================================
-               GET DOWNLOAD URL
+               GET PUBLIC URL
             ========================================= */
 
+            const { data } =
+                supabase
+                    .storage
+                    .from("media")
+                    .getPublicUrl("videos/" + fileName);
+
+
             const downloadURL =
-                await getDownloadURL(
-                    snapshot.ref
-                );
+                data.publicUrl;
 
 
             console.log(
