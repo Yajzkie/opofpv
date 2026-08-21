@@ -1,6 +1,6 @@
 /* =========================================================
-   ADMIN LOGIN
-========================================================= */
+   TOKENS
+   ========================================================= */
 
 :root {
     color-scheme: dark;
@@ -12,155 +12,9 @@
     box-sizing: border-box;
 }
 
-
-body {
-    min-height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #0f1318;
-
-    font-family: Arial, sans-serif;
-}
-
-
-/* LOGIN CONTAINER */
-
-.login-container {
-    width: 100%;
-
-    padding: 20px;
-}
-
-
-/* LOGIN BOX */
-
-.login-box {
-    width: 100%;
-    max-width: 420px;
-
-    margin: auto;
-
-    padding: 45px 35px;
-
-    background: #161d26;
-
-    border-radius: 15px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.3);
-}
-
-
-/* LOGO */
-
-.login-logo {
-    width: 100px;
-
-    margin-bottom: 20px;
-}
-
-
-/* TITLE */
-
-.login-box h1 {
-    margin-bottom: 5px;
-
-    font-size: 30px;
-
-    color: #f0f4f3;
-}
-
-
-.login-box > p {
-    margin-bottom: 30px;
-
-    color: #a7b3b1;
-}
-
-
-/* FORM */
-
-#loginForm {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-
-#loginForm input {
-    width: 100%;
-
-    padding: 14px 15px;
-
-    border: 1px solid #2a3644;
-
-    border-radius: 7px;
-
-    background: #141b23;
-    color: #e6ecea;
-
-    font-size: 16px;
-
-    outline: none;
-}
-
-
-#loginForm input::placeholder {
-    color: #7d8a88;
-}
-
-
-#loginForm input:focus {
-    border-color: #3b82f6;
-}
-
-
-/* BUTTON */
-
-#loginForm button {
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #3b82f6;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-
-#loginForm button:hover {
-    background: #2563eb;
-}
-
-
-/* MESSAGE */
-
-#loginMessage {
-    min-height: 20px;
-
-    color: #d33;
-
-    font-size: 14px;
-}
-
 /* =========================================================
    ADMIN DASHBOARD
-========================================================= */
+   ========================================================= */
 
 /* Admin body */
 
@@ -303,13 +157,13 @@ body {
     gap: 12px;
 }
 
-
 .admin-item {
     padding: 18px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     gap: 20px;
@@ -317,6 +171,20 @@ body {
     border: 1px solid #2a3644;
 
     border-radius: 8px;
+}
+
+
+.admin-thumb {
+    width: 90px;
+    height: 56px;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+
+    background: #141b23;
+
+    flex-shrink: 0;
 }
 
 

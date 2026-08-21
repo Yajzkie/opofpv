@@ -1,6 +1,6 @@
 /* =========================================================
-   FIREBASE
-========================================================= */
+   FIREBASE — AUTH & STORAGE ONLY
+   ========================================================= */
 
 import {
     initializeApp
@@ -15,15 +15,6 @@ import {
 
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    deleteDoc,
-    doc
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-
-import {
     getStorage,
     ref,
     uploadBytes,
@@ -32,8 +23,17 @@ import {
 
 
 /* =========================================================
+   SUPABASE — DATABASE
+   ========================================================= */
+
+import {
+    supabase
+} from "../supabase-client.js";
+
+
+/* =========================================================
    FIREBASE CONFIG
-========================================================= */
+   ========================================================= */
 
 const firebaseConfig = {
 
@@ -59,20 +59,18 @@ const firebaseConfig = {
 
 /* =========================================================
    INITIALIZE FIREBASE
-========================================================= */
+   ========================================================= */
 
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-
-const db = getFirestore(app);
 
 const storage = getStorage(app);
 
 
 /* =========================================================
    CHECK LOGIN
-========================================================= */
+   ========================================================= */
 
 onAuthStateChanged(auth, function (user) {
 
@@ -93,7 +91,7 @@ onAuthStateChanged(auth, function (user) {
 
 /* =========================================================
    LOGOUT
-========================================================= */
+   ========================================================= */
 
 document
     .getElementById("logoutButton")
@@ -108,7 +106,7 @@ document
 
 /* =========================================================
    SERVICES
-========================================================= */
+   ========================================================= */
 
 async function loadServices() {
 
@@ -121,16 +119,22 @@ async function loadServices() {
 
     try {
 
-        const snapshot =
-            await getDocs(
-                collection(db, "services")
-            );
+        const { data, error } =
+            await supabase
+                .from("services")
+                .select("*")
+                .order("created_at", { ascending: true });
+
+
+        if (error) {
+            throw error;
+        }
 
 
         servicesList.innerHTML = "";
 
 
-        if (snapshot.empty) {
+        if (!data || data.length === 0) {
 
             servicesList.innerHTML =
                 "<p>No services yet.</p>";
@@ -140,9 +144,7 @@ async function loadServices() {
         }
 
 
-        snapshot.forEach(function (service) {
-
-            const data = service.data();
+        data.forEach(function (service) {
 
             const card =
                 document.createElement("div");
@@ -152,12 +154,18 @@ async function loadServices() {
 
             card.innerHTML = `
 
+                <img
+                    class="admin-thumb"
+                    src="${service.background || ""}"
+                    alt=""
+                >
+
                 <div>
 
-                    <h3>${data.title}</h3>
+                    <h3>${service.title}</h3>
 
                     <p>
-                        ${data.description}
+                        ${service.description}
                     </p>
 
                 </div>
@@ -194,7 +202,7 @@ async function loadServices() {
 
 /* =========================================================
    ADD SERVICE
-========================================================= */
+   ========================================================= */
 
 document
     .getElementById("serviceForm")
@@ -209,20 +217,109 @@ document
         const description =
             document.getElementById("serviceDescription").value;
 
-        const background =
-            document.getElementById("serviceBackground").value;
+        const file =
+            document.getElementById("serviceImage").files[0];
+
+
+        if (!file) {
+
+            alert("Please select an image.");
+
+            return;
+
+        }
+
+
+        /* Check file type */
+
+        if (!file.type.startsWith("image/")) {
+
+            alert("Please select an image file.");
+
+            return;
+
+        }
 
 
         try {
 
-            await addDoc(
-                collection(db, "services"),
-                {
-                    title: title,
-                    description: description,
-                    background: background
-                }
+            const submitButton =
+                this.querySelector("button[type='submit']");
+
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Uploading...";
+
+
+            /* =========================================
+               CREATE STORAGE PATH
+            ========================================= */
+
+            const fileName =
+                Date.now() + "_" + file.name;
+
+
+            const storageRef =
+                ref(
+                    storage,
+                    "services/" + fileName
+                );
+
+
+            /* =========================================
+               UPLOAD IMAGE
+            ========================================= */
+
+            const snapshot =
+                await uploadBytes(
+                    storageRef,
+                    file
+                );
+
+
+            console.log(
+                "Uploaded:",
+                snapshot.metadata.fullPath
             );
+
+
+            /* =========================================
+               GET DOWNLOAD URL
+            ========================================= */
+
+            const downloadURL =
+                await getDownloadURL(
+                    snapshot.ref
+                );
+
+
+            console.log(
+                "Image URL:",
+                downloadURL
+            );
+
+
+            /* =========================================
+               SAVE TO SUPABASE
+            ========================================= */
+
+            const { error } =
+                await supabase
+                    .from("services")
+                    .insert({
+                        title: title,
+
+                        description: description,
+
+                        background: downloadURL
+                    });
+
+
+            if (error) {
+                throw error;
+            }
 
 
             this.reset();
@@ -231,11 +328,24 @@ document
 
             loadServices();
 
+
         } catch (error) {
 
             console.error(error);
 
-            alert("Could not add service.");
+            alert("Could not add service: " + error.message);
+
+
+        } finally {
+
+            const submitButton =
+                this.querySelector("button[type='submit']");
+
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Add Service";
 
         }
 
@@ -244,7 +354,7 @@ document
 
 /* =========================================================
    VIDEOS
-========================================================= */
+   ========================================================= */
 
 async function loadVideos() {
 
@@ -257,16 +367,22 @@ async function loadVideos() {
 
     try {
 
-        const snapshot =
-            await getDocs(
-                collection(db, "videos")
-            );
+        const { data, error } =
+            await supabase
+                .from("videos")
+                .select("*")
+                .order("created_at", { ascending: false });
+
+
+        if (error) {
+            throw error;
+        }
 
 
         videosList.innerHTML = "";
 
 
-        if (snapshot.empty) {
+        if (!data || data.length === 0) {
 
             videosList.innerHTML =
                 "<p>No videos yet.</p>";
@@ -276,9 +392,7 @@ async function loadVideos() {
         }
 
 
-        snapshot.forEach(function (video) {
-
-            const data = video.data();
+        data.forEach(function (video) {
 
             const card =
                 document.createElement("div");
@@ -290,10 +404,10 @@ async function loadVideos() {
 
                 <div>
 
-                    <h3>${data.title}</h3>
+                    <h3>${video.title}</h3>
 
                     <p>
-                        ${data.description}
+                        ${video.description}
                     </p>
 
                 </div>
@@ -330,7 +444,7 @@ async function loadVideos() {
 
 /* =========================================================
    ADD VIDEO
-========================================================= */
+   ========================================================= */
 
 document
     .getElementById("videoForm")
@@ -397,7 +511,7 @@ document
 
 
             /* =========================================
-               UPLOAD VIDEO
+               UPLOAD VIDEO (Firebase Storage)
             ========================================= */
 
             const snapshot =
@@ -430,26 +544,26 @@ document
 
 
             /* =========================================
-               SAVE TO FIRESTORE
+               SAVE TO SUPABASE
             ========================================= */
 
-            await addDoc(
-                collection(db, "videos"),
-                {
+            const { error } =
+                await supabase
+                    .from("videos")
+                    .insert({
+                        title: title,
 
-                    title: title,
+                        description: description,
 
-                    description: description,
+                        url: downloadURL,
 
-                    url: downloadURL,
+                        file_name: fileName
+                    });
 
-                    fileName: fileName,
 
-                    createdAt:
-                        new Date()
-
-                }
-            );
+            if (error) {
+                throw error;
+            }
 
 
             /* =========================================
@@ -494,7 +608,7 @@ document
 
 /* =========================================================
    DELETE
-========================================================= */
+   ========================================================= */
 
 function addDeleteListeners() {
 
@@ -526,9 +640,16 @@ function addDeleteListeners() {
 
             try {
 
-                await deleteDoc(
-                    doc(db, type, id)
-                );
+                const { error } =
+                    await supabase
+                        .from(type)
+                        .delete()
+                        .eq("id", id);
+
+
+                if (error) {
+                    throw error;
+                }
 
 
                 if (type === "services") {
@@ -558,7 +679,7 @@ function addDeleteListeners() {
 
 /* =========================================================
    MODALS
-========================================================= */
+   ========================================================= */
 
 document
     .getElementById("addServiceButton")

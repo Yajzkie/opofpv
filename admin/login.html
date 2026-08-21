@@ -10,60 +10,174 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>OSOFPV Admin Login</title>
+    <title>OPOfpv — Ground Control Login</title>
 
-    <link rel="stylesheet" href="admin.css">
+    <meta
+        name="description"
+        content="OPOfpv admin access. Authorized pilots only."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Saira:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="login.css">
 
 </head>
 
 
-<body>
+<body class="login-page">
 
-    <div class="login-container">
+    <!-- LIVE FEED BACKGROUND -->
 
-        <div class="login-box">
+    <div class="feed" aria-hidden="true">
 
-            <img
-                src="../images/logo.png"
-                alt="OSOFPV"
-                class="login-logo"
-            >
+        <video
+            class="feed-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="../images/bg1.jpg"
+        >
+            <source src="../videos/hero_bg1.mp4" type="video/mp4">
+        </video>
 
-            <h1>Admin Login</h1>
-
-            <p>OSOFPV Management</p>
-
-
-            <form id="loginForm">
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Email"
-                    required
-                >
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Password"
-                    required
-                >
-
-                <button type="submit">
-                    Login
-                </button>
-
-                <p id="loginMessage"></p>
-
-            </form>
-
-        </div>
+        <div class="feed-dim"></div>
 
     </div>
 
 
-    <script type="module" src="admin.js"></script>
+    <!-- OSD CHROME -->
+
+    <div class="osd-corners" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="osd osd-tl" aria-hidden="true">
+        <span class="rec-dot"></span>REC
+    </div>
+
+    <div class="osd osd-tr" aria-hidden="true">
+        BAT 98% · 14.8V
+    </div>
+
+    <div class="osd osd-bl" aria-hidden="true">
+        GPS LOCK · 12 SATS
+    </div>
+
+    <div class="osd osd-br" aria-hidden="true">
+        GCS v2.4 · 5.8GHZ
+    </div>
+
+
+    <!-- LOGIN PANEL -->
+
+    <main class="login-wrap">
+
+        <section class="login-panel" aria-labelledby="loginTitle">
+
+            <img
+                src="../images/logo.png"
+                alt="OPOfpv"
+                class="login-logo"
+            >
+
+            <p class="eyebrow">// Restricted access</p>
+
+            <h1 id="loginTitle">Ground Control</h1>
+
+            <p class="login-sub">
+                OPOfpv content management.
+                Authorized pilots only.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="field">
+
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="pilot@opofpv.com"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="••••••••"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="btn-arm"
+                >
+                    Authenticate
+                </button>
+
+                <p
+                    id="loginMessage"
+                    class="login-message"
+                    role="alert"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+
+            <!-- PRE-ARM CHECKLIST -->
+
+            <ul class="prearm" aria-hidden="true">
+
+                <li id="checkLink">
+                    <span>LINK</span>
+                    <b></b>
+                    <em>OK</em>
+                </li>
+
+                <li id="checkPilot">
+                    <span>PILOT ID</span>
+                    <b></b>
+                    <em>STANDBY</em>
+                </li>
+
+                <li id="checkKey">
+                    <span>PASSKEY</span>
+                    <b></b>
+                    <em>STANDBY</em>
+                </li>
+
+            </ul>
+
+
+            <a class="back-link" href="../index.html">
+                ← Back to site
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="login.js"></script>
 
 </body>
 

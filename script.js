@@ -1,37 +1,72 @@
+import { supabase } from "./supabase-client.js";
+
 const { createApp } = Vue;
+
+const DEFAULT_SERVICES = [
+    {
+        title: "Aerial Photography",
+        description: "High-quality aerial photography captured from above.",
+        background: "images/bg1.jpg"
+    },
+
+    {
+        title: "Drone Videography",
+        description: "Professional cinematic drone footage.",
+        background: "images/drone-video.jpg"
+    },
+
+    {
+        title: "Real Estate",
+        description: "Stunning aerial photos and videos for properties.",
+        background: "images/real-estate.jpg"
+    },
+
+    {
+        title: "Event Coverage",
+        description: "Capture events from a unique aerial perspective.",
+        background: "images/event.jpg"
+    }
+];
 
 createApp({
 
     data() {
         return {
 
-            services: [
-                {
-                    title: "Aerial Photography",
-                    description: "High-quality aerial photography captured from above.",
-                    background: "images/bg1.jpg"
-                },
-
-                {
-                    title: "Drone Videography",
-                    description: "Professional cinematic drone footage.",
-                    background: "images/drone-video.jpg"
-                },
-
-                {
-                    title: "Real Estate",
-                    description: "Stunning aerial photos and videos for properties.",
-                    background: "images/real-estate.jpg"
-                },
-
-                {
-                    title: "Event Coverage",
-                    description: "Capture events from a unique aerial perspective.",
-                    background: "images/event.jpg"
-                }
-            ]
+            services: DEFAULT_SERVICES
 
         };
+    },
+
+    async mounted() {
+
+        try {
+
+            const { data, error } =
+                await supabase
+                    .from("services")
+                    .select("*")
+                    .order("created_at", { ascending: true });
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            if (data && data.length > 0) {
+                this.services = data;
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Could not load services:",
+                error
+            );
+
+        }
+
     }
 
 }).mount("#app");
