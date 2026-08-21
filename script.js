@@ -76,7 +76,28 @@ createApp({
 // WORK PROJECT CARDS
 // ==========================
 
-const workCards = document.querySelectorAll(".work-card");
+const FALLBACK_VIDEOS = [
+    {
+        title: "Project 1",
+        description: "FPV drone footage showcasing our work.",
+        url: "videos/project1.mp4"
+    },
+
+    {
+        title: "Project 2",
+        description: "Cinematic aerial footage captured with FPV.",
+        url: "videos/project1.mp4"
+    },
+
+    {
+        title: "Project 3",
+        description: "Dynamic drone footage for visual storytelling.",
+        url: "videos/project2.mp4"
+    }
+];
+
+const workGrid =
+    document.querySelector(".work-cards");
 
 const workVideoPlayer =
     document.getElementById("workVideoPlayer");
@@ -88,31 +109,133 @@ const closeWorkVideo =
     document.getElementById("closeWorkVideo");
 
 
-/* Open video */
+function createWorkCard(video, index) {
 
-workCards.forEach(function (card) {
+    const card =
+        document.createElement("div");
 
-    card.addEventListener("click", function () {
+    card.className = "work-card";
 
-        const videoSource =
-            this.dataset.video;
+    card.dataset.video =
+        video.url;
 
-        workVideo.src = videoSource;
 
-        workVideoPlayer.classList.add("active");
+    const clipNumber =
+        String(index + 1).padStart(2, "0");
 
-        document.body.style.overflow = "hidden";
 
-        workVideo.load();
+    card.innerHTML = `
 
-        workVideo.play().catch(function (error) {
+        <div class="work-thumbnail">
 
-            console.log(
-                "Video play error:",
-                error
-            );
+            <video muted preload="metadata">
+                <source src="${video.url}" type="video/mp4">
+            </video>
 
-        });
+            <div class="play-icon">▶</div>
+
+        </div>
+
+        <div class="work-card-content">
+
+            <p class="card-meta">CLIP ${clipNumber}</p>
+
+            <h3>${video.title}</h3>
+
+            <p>${video.description}</p>
+
+        </div>
+
+    `;
+
+    return card;
+
+}
+
+
+function renderWorkVideos(videos) {
+
+    workGrid.innerHTML = "";
+
+    videos.forEach(function (video, index) {
+
+        workGrid.appendChild(
+            createWorkCard(video, index)
+        );
+
+    });
+
+}
+
+
+async function loadWorkVideos() {
+
+    try {
+
+        const { data, error } =
+            await supabase
+                .from("videos")
+                .select("*")
+                .order("created_at", { ascending: false });
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (data && data.length > 0) {
+
+            renderWorkVideos(data.slice(0, 3));
+
+        } else {
+
+            renderWorkVideos(FALLBACK_VIDEOS);
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Could not load videos:",
+            error
+        );
+
+        renderWorkVideos(FALLBACK_VIDEOS);
+
+    }
+
+}
+
+loadWorkVideos();
+
+
+/* Open video — event delegation */
+
+workGrid.addEventListener("click", function (event) {
+
+    const card =
+        event.target.closest(".work-card");
+
+    if (!card) {
+        return;
+    }
+
+    workVideo.src =
+        card.dataset.video;
+
+    workVideoPlayer.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    workVideo.load();
+
+    workVideo.play().catch(function (error) {
+
+        console.log(
+            "Video play error:",
+            error
+        );
 
     });
 
